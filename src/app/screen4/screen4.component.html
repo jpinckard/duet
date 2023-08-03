@@ -1,0 +1,80 @@
+<!-- screen4.component.html -->
+
+<div>
+    <h2>Screen 4 - Results</h2>
+  
+    <!-- Toggle button to switch between "EDIT" and "RESULTS" views -->
+    <div>
+      <input type="checkbox" id="toggleView" [(ngModel)]="isEditMode">
+      <label for="toggleView">Toggle View</label>
+    </div>
+  
+    <!-- Display process name, cycle time, and work duration -->
+    <div>
+      <h3>Process Details</h3>
+      <p><strong>Name:</strong> {{ processName }}</p>
+      <p><strong>Cycle Time (seconds):</strong> {{ cycleTime }}</p>
+      <p><strong>Work Duration (hours):</strong> {{ workDuration }}</p>
+    </div>
+  
+    <!-- Table for tasks and percent contribution -->
+    <table>
+      <thead>
+        <tr>
+          <th>TASKS</th>
+          <th>Percent Contribution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks; let i = index;">
+          <td>{{ i + 1 }}. {{ task.name }}</td>
+          <td><input type="number" [(ngModel)]="percentContributions[i]" (input)="validatePercentContribution(i)"></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- "Upload" button for emailing or downloading the results -->
+    <button (click)="onUploadResults()">Upload</button>
+  </div>
+  screen4.component.ts:
+  
+  typescript
+  Copy code
+  // screen4.component.ts
+  
+  import { Component } from '@angular/core';
+  import { Task } from '../models/task.model';
+  
+  @Component({
+    selector: 'app-screen4',
+    templateUrl: './screen4.component.html',
+    styleUrls: ['./screen4.component.css']
+  })
+  export class Screen4Component {
+    processName: string = 'Sample Process'; // Replace with your process name
+    cycleTime: number = 30; // Replace with your cycle time value
+    workDuration: number = 5; // Replace with your work duration value
+    tasks: Task[] = []; // Replace with the tasks associated with the process
+    percentContributions: number[] = Array(this.tasks.length).fill(0); // Initialize with 0
+  
+    isEditMode: boolean = false; // Tracks whether the component is in edit mode
+  
+    validatePercentContribution(index: number): void {
+      // Ensure that the percent contribution value is within the valid range (0 to 100)
+      if (this.percentContributions[index] < 0) {
+        this.percentContributions[index] = 0;
+      } else if (this.percentContributions[index] > 100) {
+        this.percentContributions[index] = 100;
+      }
+    }
+  
+    onUploadResults(): void {
+      // Logic to handle uploading results (emailing or downloading)
+      // For demonstration purposes, we'll just log the percent contributions for now
+      console.log('Percent Contributions:', this.percentContributions);
+    }
+  }
+  In the above code, we've implemented the HTML template for Screen 4, which includes a toggle button to switch between "
+  
+  
+  

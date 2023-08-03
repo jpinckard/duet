@@ -1,0 +1,38 @@
+<!-- screen3.component.html -->
+
+<div>
+    <h2>Screen 3 - Review and Edit Process</h2>
+  
+    <!-- Display process name, cycle time, and work duration -->
+    <div>
+      <h3>Process Details</h3>
+      <p><strong>Name:</strong> {{ processName }}</p>
+      <p><strong>Cycle Time (seconds):</strong> {{ cycleTime }}</p>
+      <p><strong>Work Duration (hours):</strong> {{ workDuration }}</p>
+    </div>
+  
+    <!-- Table for tasks and editing commands -->
+    <table>
+      <thead>
+        <tr>
+          <th>TASKS</th>
+          <th>Editing Commands</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks; let i = index;">
+          <td>{{ i + 1 }}. {{ task.name }}</td>
+          <td>
+            <button (click)="editTask(i)">EDIT</button>
+            <button (click)="confirmDeleteTask(i)">DELETE</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Toggle button to switch between "EDIT" and "RESULTS" views -->
+    <div>
+      <input type="checkbox" id="toggleView" [(ngModel)]="isEditMode">
+      <label for="toggleView">Toggle View</label>
+    </div>
+  </div>
