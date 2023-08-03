@@ -1,0 +1,24 @@
+<!-- screen1.component.html -->
+
+<div>
+    <h2>Create a New Process</h2>
+  
+    <form (ngSubmit)="onFormSubmit()">
+      <div class="form-group">
+        <label for="processName">Process Name:</label>
+        <input type="text" id="processName" name="processName" [(ngModel)]="processName" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="cycleTime">Cycle Time (seconds):</label>
+        <input type="number" id="cycleTime" name="cycleTime" [(ngModel)]="cycleTime" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="workDuration">Work Duration (hours):</label>
+        <input type="number" id="workDuration" name="workDuration" [(ngModel)]="workDuration" required step="0.01">
+      </div>
+  
+      <button type="submit" [disabled]="!isFormValid()">Continue to Screen 2</button>
+    </form>
+  </div>

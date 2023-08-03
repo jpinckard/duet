@@ -1,0 +1,40 @@
+<!-- screen2.component.html -->
+
+<div>
+    <h2>Screen 2 - Add Tasks</h2>
+  
+    <!-- Form for entering Task Name and Notes -->
+    <form (ngSubmit)="onFormSubmit()">
+      <div class="form-group">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName" [(ngModel)]="taskName" required>
+      </div>
+      <div class="form-group">
+        <label for="taskNotes">Task Notes:</label>
+        <textarea id="taskNotes" name="taskNotes" [(ngModel)]="taskNotes"></textarea>
+      </div>
+  
+      <!-- Table for OMNI-RES and REPS values -->
+      <table>
+        <thead>
+          <tr>
+            <th>OMNI-RES</th>
+            <th>REPS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let omniRes of omniResValues; let i = index;">
+            <td>{{ omniRes }}</td>
+            <td>
+              <input type="number" [(ngModel)]="repsValues[i]" (input)="validateRepsValue(i)">
+              <button type="button" (click)="incrementRepsValue(i)">+</button>
+              <button type="button" (click)="decrementRepsValue(i)">-</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- DONE button -->
+      <button type="submit" [disabled]="!isFormValid()">DONE</button>
+    </form>
+  </div>
