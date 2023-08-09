@@ -1,0 +1,49 @@
+@import 'styles'; // Import shared styles
+
+/* Component-specific styles */
+:host {
+  display: block;
+}
+
+.container {
+  background-color: $primary-background-color; // Use the shared background color
+  font-family: $primary-font-family; // Use the shared font family
+  color: $primary-font-color; // Use the shared font
+}
+
+/* Center the form on the screen */
+form {
+    display: block;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Style form elements */
+  label {
+    margin-bottom: 8px;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  
+  button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }

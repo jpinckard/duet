@@ -11,6 +11,15 @@ import { Screen4Component } from './screen4/screen4.component';
 import { FormsModule } from '@angular/forms';
 import { Task } from './models/task.model';
 import { Process } from './models/process.model';
+import { HeaderComponent } from './header/header.component';
+
+// POPUPS
+import { NotesPopupComponent } from './notes-popup/notes-popup.component'
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -18,14 +27,20 @@ import { Process } from './models/process.model';
     Screen1Component,
     Screen2Component,
     Screen3Component,
-    Screen4Component
+    Screen4Component,
+    HeaderComponent,
+    NotesPopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
