@@ -1,1 +1,222 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+styles.css
+
+This file defines styles that are shared across the application.
+
+*/
+
+
+/* Define common styles */
+$primary-background-color: #004D80;
+$primary-foreground-color: #FF9300;
+$primary-font-family: 'Arial', sans-serif;
+$primary-font-color: #ffffff;
+$h2-font-color: #bdbdbd;
+
+html {
+    background-color: $primary-background-color;
+    font-family: $primary-font-family;
+    color: $primary-font-color;
+}
+
+h2{
+   color:$h2-font-color;
+   font-weight: normal;
+   margin:5px;
+}
+
+
+input{
+  border-radius: 5px;
+  border-style: solid;
+  border: 1px solid #cccccc;
+}
+
+.center {
+    text-align: center;
+}
+
+
+// SUBMIT BUTTON //
+/* Defines styling for the submit button and its active and disabled states. */
+
+.submit{
+    background-color: $primary-foreground-color;
+    border-style: solid;
+    color: black;
+}
+
+.submit:active {
+    background-color: gray;
+}
+
+.submit:disabled {
+    background-color: rgba(128, 128, 128, 0.527);
+}
+
+
+// LOGO STYLING //
+/* Defines styling for the logos. */
+
+.logo{
+    display: inline-block;
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 18px;
+    padding:12px;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+.detailed-logo{
+    display: inline-block;
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 18px;
+    padding:12px;
+    vertical-align: middle;
+    margin: 0 auto;
+    max-height: 10vh;
+}
+
+// ARROW BUTTONS //
+/* The arrow increment buttons on the omni reps values. */
+.carat-button{
+    background-color: transparent;
+    color: $primary-foreground-color;
+    font-weight: bolder;
+    font-size: large;
+    border: 0px solid white;
+}
+.carat-button:active{
+    background-color: transparent;
+    color: gray;
+    font-weight: bolder;
+    font-size: large;
+    border: 0px solid white;
+} 
+
+// TABLE FORMATTING //
+/* Gives the table a nice banded look.*/
+
+table {
+    border-spacing: 0;
+    width: 100%;
+  }
+
+th {
+    background-color: $primary-background-color;
+    padding: 5px;
+  }
+
+  td{
+    padding: 5px;
+  }
+
+tr:nth-child(odd) {
+    background-color: #1A5F8D;
+  }
+
+  .form-row{
+    text-align: center;
+  }
+
+  .reps-input{
+    width: 40px;
+  }
+
+// TOGGLE SWITCH //
+/* The switch - the box around the slider */
+/* Used on screens 3 and 4 to toggle between 'edit' and 'results'.*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  /* Screen 4 */
+  /* #FIXME These should be moved to screen4.component.scss eventually, but they aren't working in that spot at the moment for some reason.*/
+  .percent-contributions {
+    text-align: right;
+  }
+  
+  .injury-probability{
+    background-color: greenyellow;
+    color: black;
+    line-height: 3;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 5px;
+  }
+  
+  .download-button-container{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+  }
+  
+  .download-button{
+    height: 50px;
+    width: 50px;
+    border: 0px solid #cccccc;
+    background-color: transparent;
+    color:$primary-font-color;
+    font-size: xx-large;
+  }

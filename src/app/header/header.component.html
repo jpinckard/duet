@@ -1,0 +1,28 @@
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<header class="header">
+  <div class="logo">
+    <!-- Add your logo here -->
+    <img src="assets/logotype.png" alt="Logo">
+  </div>
+
+  <button class="hamburger-menu">
+    <!--img src="assets/menu-icon.svg"-->
+    <button class="btn"><i class="fa fa-bars"></i></button>
+  </button>
+
+  <mat-toolbar>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openAccount()">Account</button>
+    <button mat-menu-item (click)="openInstructions()">Instructions</button>
+    <button mat-menu-item (click)="openReferences()">References</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+
+</header>

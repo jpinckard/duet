@@ -1,0 +1,12 @@
+/* Import shared styles */
+@import '../styles';
+
+/* Applies common styles to the entire application */
+.app-container {
+  margin: 0 auto;
+  display:block;
+}
+
+body{
+    background-color: $primary-background-color;
+}
