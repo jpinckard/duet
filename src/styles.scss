@@ -1,5 +1,5 @@
 /*
-styles.css
+styles.scss
 
 This file defines styles that are shared across the application.
 
@@ -11,6 +11,7 @@ $primary-background-color: #004D80;
 $primary-foreground-color: #FF9300;
 $primary-font-family: 'Arial', sans-serif;
 $primary-font-color: #ffffff;
+$h1-font-color: $primary-font-color;
 $h2-font-color: #bdbdbd;
 
 html {
@@ -18,6 +19,14 @@ html {
     font-family: $primary-font-family;
     color: $primary-font-color;
 }
+
+
+h1{
+  color:$h1-font-color;
+  font-weight: normal;
+  text-align: center;
+}
+
 
 h2{
    color:$h2-font-color;
@@ -34,6 +43,34 @@ input{
 
 .center {
     text-align: center;
+}
+
+.bottom {
+  text-align: center;
+  bottom:0;
+  padding: 50px;
+}
+
+
+.confirm{
+  background-color: $primary-foreground-color;
+  border-style: solid;
+  color: black;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.cancel{
+  background-color: $primary-foreground-color;
+  border-style: solid;
+  color: black;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+button{
+  padding:10px;
+  border-radius: 5px;
 }
 
 
@@ -85,14 +122,15 @@ input{
     background-color: transparent;
     color: $primary-foreground-color;
     font-weight: bolder;
-    font-size: large;
+    font-size: 20pt;
     border: 0px solid white;
+    display: inline;
+    vertical-align: middle;
 }
 .carat-button:active{
     background-color: transparent;
     color: gray;
     font-weight: bolder;
-    font-size: large;
     border: 0px solid white;
 } 
 
@@ -107,10 +145,16 @@ table {
 th {
     background-color: $primary-background-color;
     padding: 5px;
+    text-align: left;
+  }
+
+  tr{
+    text-align: justify;
   }
 
   td{
     padding: 5px;
+    text-align: left;
   }
 
 tr:nth-child(odd) {
@@ -118,11 +162,14 @@ tr:nth-child(odd) {
   }
 
   .form-row{
-    text-align: center;
+    text-align: left;
+    
   }
 
   .reps-input{
     width: 40px;
+    display: inline;
+    vertical-align: middle;
   }
 
 // TOGGLE SWITCH //
@@ -191,7 +238,7 @@ tr:nth-child(odd) {
   }
 
   /* Screen 4 */
-  /* #FIXME These should be moved to screen4.component.scss eventually, but they aren't working in that spot at the moment for some reason.*/
+  /* #FIXME These should be moved to screen_process-results.component.scss eventually, but they aren't working in that spot at the moment for some reason.*/
   .percent-contributions {
     text-align: right;
   }
@@ -219,4 +266,46 @@ tr:nth-child(odd) {
     background-color: transparent;
     color:$primary-font-color;
     font-size: xx-large;
+  }
+
+
+  .icon-button{
+    border: 0px solid #cccccc;
+    background-color: transparent;
+    color:$primary-font-color;
+    font-size: x-large;
+  }
+
+
+  .toggle_switch_dev{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  .container-editing-commands{
+    width: 100vw;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin: auto;
+  }
+
+  .container-task-names{
+    width:max-content;
+    display:auto;
+    justify-content: center;
+    align-items: left;
+    padding-right: 50px;
+  }
+
+
+  
+  .edit-label{
+    margin-right:10px;
+  }
+  .results-label{
+    margin-left:10px;
   }

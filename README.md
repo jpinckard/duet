@@ -6,10 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Compile SCSS
-
-This project uses SASS, which is an extended form of CSS. Whenever you make changes to any SCSS file, make sure to go to styles.scss and save it for your changes to work.
-
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
@@ -29,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Deploying with Amplify
+
+First, build the application:
+
+`ng build`
+
+Then, publish your changes to amplify:
+
+`amplify publish`
+
+In the AWS console, navigate to the Amplify page. Then, navigate to All Apps > duet. 
+Then, drag the 'dist/duet' folder into the Amplify dev page for duet.

@@ -1,0 +1,40 @@
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div>
+  <h1>Edit Processes</h1>
+  <!-- <br/>
+  <div class="center" >
+    <label>edit</label>
+    <label class="switch">
+      <input type="checkbox" id="toggleView" [(ngModel)]="isEditMode" (change)="toggleView()">
+      <span class="slider round"></span>
+    </label>
+    <label>results</label>
+  </div> -->
+
+  <!-- Table for tasks and editing commands -->
+  <button (click)="addProcess(0)">Create Process</button>
+  <table>
+    <thead>
+      <tr>
+        <th>PROCESSES</th>
+        <th>Editing Commands</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let process of processes; let i = index;">
+        <td>{{ i + 1 }}. {{ process.name }}</td>
+        <td>
+          <!--button (click)="addProcess(i)">+</button-->
+          <button (click)="editProcess(i)">EDIT</button>
+          <button (click)="confirmDeleteProcess(i)">DELETE</button>
+        </td>
+        <td style="color:black" [ngStyle]="{'background-color': categoryColor[getInjuryProbabilityCategory(process)]}">
+          Level {{ getInjuryProbabilityCategory(process) | number: '0.0-0'}} <!--; | number: '1.1-1'-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

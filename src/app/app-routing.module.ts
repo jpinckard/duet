@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Screen1Component } from './screen1/screen1.component';
-import { Screen2Component } from './screen2/screen2.component';
-import { Screen3Component } from './screen3/screen3.component';
-import { Screen4Component } from './screen4/screen4.component';
-
+import { ScreenProcessCreateComponent } from './screen_process-create/screen_process-create.component';
+import { ScreenTaskCreateComponent } from './screen_task-create/screen_task-create.component';
+import { ScreenProcessSelectedComponent } from './screen_process-selected/screen_process-selected.component';
+import { ScreenProcessResultsComponent } from './screen_process-results/screen_process-results.component';
+import { ScreenProcessManagerComponent } from './screen_process-manager/screen_process-manager.component';
+import { BrowserModule } from '@angular/platform-browser';
 const routes: Routes = [
-  { path: '', component: Screen1Component },
-  { path: 'screen2', component: Screen2Component },
-  { path: 'screen3', component: Screen3Component },
-  { path: 'screen4', component: Screen4Component },
+  { path: '', component: ScreenProcessManagerComponent },
+  { path: 'screen_process-create', component: ScreenProcessCreateComponent },
+  { path: 'screen_task-create', component: ScreenTaskCreateComponent },
+  { path: 'screen_process-selected', component: ScreenProcessSelectedComponent },
+  { path: 'screen_process-results', component: ScreenProcessResultsComponent },
+  { path: 'screen_process-manager', component: ScreenProcessManagerComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+  imports: [RouterModule.forRoot(routes), BrowserModule],
+  exports: [RouterModule]})
 export class AppRoutingModule { }

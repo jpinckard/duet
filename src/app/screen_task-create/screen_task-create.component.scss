@@ -1,0 +1,33 @@
+@import '../../styles.scss'; // Import shared styles
+
+/* Component-specific styles */
+:host {
+  display: block;
+}
+
+.form-group{
+  width: 100%;
+}
+
+.container {
+  background-color: $primary-background-color; // Use the shared background color
+  font-family: $primary-font-family; // Use the shared font family
+  color: $primary-font-color; // Use the shared font
+  margin: 0 auto;
+  display:block;
+}
+.btn {
+  background-color: transparent;
+  border: 0px solid white;
+
+  //color: white;
+  font-size:xx-large;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:active {
+  background-color: transparent;
+  color: gray;
+}
+

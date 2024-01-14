@@ -1,57 +1,115 @@
-// process.service.ts
+/*
+Author: Joy Pinckard
+
+PROCESS SERVICE
+Handles data manipulation for processes.
+*/
 
 import { Injectable } from '@angular/core';
 import { Process } from './models/process.model';
 import { Task } from './models/task.model';
 import { TaskService } from './task.service';
+import { UtilityService } from './utility.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable({ providedIn: 'root' })
+
 export class ProcessService {
   private processes: Process[] = [];
+  private currentProcess : Process; // The process being edited.
   private taskService:TaskService;
   private cumulativeDamageCycle:number = 0;
   private cumulativeDamageTotal:number = 0;
   private injuryProbability:number = 0;
 
-  constructor(taskService:TaskService) {
-    // Retrieve processes from localStorage on service initialization
-    this.retrieveProcessesFromLocalStorage();
-    this.taskService = taskService;
+  constructor(
+    taskService:TaskService,
+    private router: Router,
+    private utilityService: UtilityService) {
+      this.retrieveProcessesFromLocalStorage();
+      this.taskService = taskService;
+      this.currentProcess = this.getProcess()
   }
 
+  // Add a new process. All processes must have unique names
   addProcess(process: Process): void {
-    this.processes.push(process);
+
+    const existingProcessIndex = this.processes.findIndex(existingProcess => existingProcess.name === process.name);
+
+    if (existingProcessIndex !== -1) {
+      this.processes[existingProcessIndex] = process; // Update the existing process with the new process data
+    }
+    else {
+      this.processes.push(process); // Process with the same name does not exist, add the new process
+    }
+
+    console.log(JSON.stringify(this.processes))
+
+    this.currentProcess = process;
+
     this.saveProcessesToLocalStorage(); // Save processes to localStorage
   }
 
+  // Delete a process by index
+  deleteProcess(index: number): void {
+    if (index >= 0 && index < this.processes.length) {
+      this.processes.splice(index, 1);
+      this.saveProcessesToLocalStorage(); // Save updated processes to localStorage
+    }
+  }
+
+  // Get all processes.
   getProcesses(): Process[] {
     return this.processes;
   }
 
+  // Get the first process in the list.
   getProcess(): Process {
-    if (this.processes.length>0){
-      return this.processes[0];
+    // If there is no selected process
+    if (this.currentProcess == null){
+      // If there are defined processes
+      if (this.processes.length > 0){
+        this.currentProcess = this.processes[0];
+        sessionStorage.setItem('currentProcess', JSON.stringify(this.currentProcess));
+      }
+      // If there are no defined processes
+      else{
+        console.log("No process defined. Please create a new process.");        
+        // Redirect to ScreenTaskCreateComponent
+        this.router.navigate(['/screen_process-create']);
+      }
     }
-    return new Process("No process defined.", 0, 0);
+
+    const p = sessionStorage.getItem('currentProcess');
+    if (p){ this.currentProcess = JSON.parse(p); }
+
+    return this.currentProcess;
   }
 
   // Save processes to localStorage
   saveProcessesToLocalStorage(): void {
-    localStorage.setItem('processes', JSON.stringify(this.processes));
+    sessionStorage.setItem('processes', JSON.stringify(this.processes));
   }
 
   // Retrieve processes from localStorage
   retrieveProcessesFromLocalStorage(): void {
-    const storedProcesses = localStorage.getItem('processes');
+    const storedProcesses = sessionStorage.getItem('processes');
     if (storedProcesses) {
       this.processes = JSON.parse(storedProcesses);
     }
   }
 
+  // Sets the process that is currently being edited.
+  setCurrentProcess(process: Process): void {
+    this.currentProcess = process;
+    console.log("Current process: ", process.name);
+    sessionStorage.setItem('currentProcess', JSON.stringify(this.currentProcess));
+  }
+
   // Add a task to a process, updating if the task with the same name exists
   addTask(process: Process, task: Task): void {
+
     const existingTaskIndex = process.tasks.findIndex(existingTask => existingTask.name === task.name);
 
     if (existingTaskIndex !== -1) {
@@ -61,36 +119,41 @@ export class ProcessService {
       process.tasks.push(task); // Task with the same name does not exist, add the new task
     }
 
-    this.saveProcessesToLocalStorage(); // Save updated processes to localStorage
+    
+    this.addProcess(process);
+
+    //this.saveProcessesToLocalStorage(); // Save updated processes to sessionStorage
   }
 
+  // Get all tasks associated with a process.
   getTasks(process: Process): Task[] {
     return process.tasks;
   }
 
   // Save tasks to localStorage
   saveTasksToLocalStorage(process: Process): void {
-    localStorage.setItem('tasks', JSON.stringify(process.tasks));
+    sessionStorage.setItem('tasks', JSON.stringify(process.tasks));
   }
 
   // Delete a task by index
   deleteTask(process: Process, index: number): void {
     if (index >= 0 && index < process.tasks.length) {
       process.tasks.splice(index, 1);
-      this.saveProcessesToLocalStorage(); // Save updated tasks to localStorage
+      this.addProcess(process);
+      this.saveProcessesToLocalStorage(); // Save updated tasks to sessionStorage
     }
   }
 
-  // Retrieve tasks from localStorage
+  // Retrieve tasks from local storage.
   retrieveTasksFromLocalStorage(process: Process): void {
-    const storedTasks = localStorage.getItem('tasks');
+    const storedTasks = sessionStorage.getItem('tasks');
     if (storedTasks) {
       process.tasks = JSON.parse(storedTasks);
     }
   }
-  
+
+  // Get the cumulative damage (cycle) for a given process.
   getCumulativeDamageCycle(process:Process): number {
-    // Step 1: Calculate cumulative damage (CD) for each task
     const tasks : Task[] = this.getTasks(process);
     this.cumulativeDamageCycle = 0;
 
@@ -101,7 +164,7 @@ export class ProcessService {
     return this.cumulativeDamageCycle;
   }
 
-  
+  // Get the percent contribution of a given task.
   getPercentContribution(task: Task){
     return ((this.taskService.getCumulativeDamage(task) / this.getCumulativeDamageCycle(this.getProcess())) * 100)
   }
@@ -119,8 +182,8 @@ export class ProcessService {
     this.saveTasksToLocalStorage(process);
   }
 
+  // Algorithm to get the probability of injury for a given process.
   getInjuryProbability(process:Process){
-    // Step 1: Calculate cumulative damage (CD) for each task
     this.cumulativeDamageCycle = this.getCumulativeDamageCycle(process);
 
     this.cumulativeDamageTotal = this.cumulativeDamageCycle * process.workDuration * 3600 / process.cycleTime;
@@ -134,7 +197,13 @@ export class ProcessService {
     return this.injuryProbability;
   }
 
-  // Exponent should be 0.127944201007
-  // Dividend should be 1.13648958595 
 
+  // Sets all members of a process while ensuring that they stay within the desired range.
+  setProcessValues(process:Process, name: string, cycleTime: number, workDuration: number): void {
+    process.name = name;
+    process.cycleTime = this.utilityService.clampValue(cycleTime, 0, this.utilityService.maxCycleTime);
+    process.workDuration = this.utilityService.clampValue(workDuration, 0, this.utilityService.maxWorkDuration);
+
+    this.addProcess(process);
+  }
 }
