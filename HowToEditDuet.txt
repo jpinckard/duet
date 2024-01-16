@@ -1,0 +1,13 @@
+DUET NOTES FOR PRESTON	
+REQUIRED READING: Linus Tsorvald's Wikipedia Page
+
+GITLAB:
+https://github.com/jpinckard/duet
+Code > Download Zip
+Extract All
+Then, open Visual Code
+Open Folder > Duet
+Edit html files to edit the "visual layout"
+Edit css css files to edit the "visual styles"
+
+

@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DisableDoubleTapZoomDirective } from './disable-double-tap-zoom.directive';
+import { InstructionsComponent } from './instructions/instructions.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DisableDoubleTapZoomDirective } from './disable-double-tap-zoom.directi
     HeaderComponent,
     NotesPopupComponent,
     DisableDoubleTapZoomDirective,
+    InstructionsComponent,
   ],
   imports: [
     BrowserModule,
